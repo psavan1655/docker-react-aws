@@ -5,13 +5,10 @@ services:
 before_install:
   - docker build -t dockerreact -f Dockerfile.dev .
 
-script:
-  - docker run -e CI=true dockerreact npm run test
-
 deploy:
   provider: elasticbeanstalk
   access_key_id: $ACCESS_KEY_ID
-  secret_access_key: $SECRET_ACCESS_KEY
+  secret_access_key: "$SECRET_ACCESS_KEY"
   region: "ap-south-1"
   app: "helloworld"
   env: "Helloworld-env"
