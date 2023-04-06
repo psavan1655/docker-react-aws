@@ -1,0 +1,28 @@
+version: "3"
+services:
+  dev:
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /var/reactapp/node_modules
+      - .:/var/reactapp
+
+  test:
+    environment:
+      - WDS_SOCKET_HOST=127.0.0.1
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /var/reactapp/node_modules
+      - .:/var/reactapp
+    command: ["npm", "run", "test"]
